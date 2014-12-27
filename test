@@ -22,20 +22,96 @@ fi
 . assert.sh
 . archive_helpers
 
-# Universal untar
-assert_raises "true" 0
+# create dummy data
+dd status=noxfer if=/dev/urandom of=$TMP_DIR/random bs=4K count=8 2> /dev/null
 
-# No compression
-assert_raises "true" 0
+# UnTar
+# TODO
+assert_end "archive_helpers (UnTar)"
 
-# Gzip
-assert_raises "true" 0
+# Tar
+# TODO
+assert_end "archive_helpers (Tar)"
 
-# Bzip2
-assert_raises "true" 0
+# TarNpb
+# TODO
+assert_end "archive_helpers (TarNpb)"
+
+# TarExclude
+# TODO
+assert_end "archive_helpers (TarExclude)"
+
+# Gz
+assert_raises "Gz $TMP_DIR $TMP_DIR.gz" 1 ""
+assert_raises "test -f $TMP_DIR.gz" 1 ""
+assert_raises "Gz $TMP_DIR/random $TMP_DIR/random.gz" 0 ""
+assert_raises "gzip -cd $TMP_DIR/random.gz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
+rm $TMP_DIR/random{2,.gz}
+assert_raises "Gz $TMP_DIR/random > $TMP_DIR/random.gz" 0 ""
+assert_raises "gzip -cd $TMP_DIR/random.gz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
+rm $TMP_DIR/random{2,.gz}
+assert "Gz $TMP_DIR/random > /dev/null" ""
+assert "Gz $TMP_DIR/random /dev/null" ""
+assert_end "archive_helpers (Gz)"
+
+# TarGz
+# TODO ""
+assert_end "archive_helpers (TarGz)"
+
+# TarGzNpb
+# TODO ""
+assert_end "archive_helpers (TarGzNpb)"
+
+# TarGzExclude
+# TODO ""
+assert_end "archive_helpers (TarGzExclude)"
+
+# Bz2
+assert_raises "Bz2 $TMP_DIR $TMP_DIR.bz2" 1 ""
+assert_raises "test -f $TMP_DIR.bz2" 1 ""
+assert_raises "Bz2 $TMP_DIR/random $TMP_DIR/random.bz2" 0 ""
+assert_raises "bzip2 -cd $TMP_DIR/random.bz2 > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
+rm $TMP_DIR/random{2,.bz2}
+assert_raises "Bz2 $TMP_DIR/random > $TMP_DIR/random.bz2" 0 ""
+assert_raises "bzip2 -cd $TMP_DIR/random.bz2 > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
+rm $TMP_DIR/random{2,.bz2}
+assert "Bz2 $TMP_DIR/random > /dev/null" ""
+assert "Bz2 $TMP_DIR/random /dev/null" ""
+assert_end "archive_helpers (Bz2)"
+
+# TarBz2
+# TODO ""
+assert_end "archive_helpers (TarBz2)"
+
+# TarBz2Npb
+# TODO ""
+assert_end "archive_helpers (TarBz2Npb)"
+
+# TarBz2Exclude
+# TODO ""
+assert_end "archive_helpers (TarBz2Exclude)"
 
 # Xz
-assert_raises "true" 0
+assert_raises "Xz $TMP_DIR $TMP_DIR.xz" 1 ""
+assert_raises "test -f $TMP_DIR.xz" 1 ""
+assert_raises "Xz $TMP_DIR/random $TMP_DIR/random.xz" 0 ""
+assert_raises "xz -cd $TMP_DIR/random.xz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
+rm $TMP_DIR/random{2,.xz}
+assert_raises "Xz $TMP_DIR/random > $TMP_DIR/random.xz" 0 ""
+assert_raises "xz -cd $TMP_DIR/random.xz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
+rm $TMP_DIR/random{2,.xz}
+assert "Xz $TMP_DIR/random > /dev/null" ""
+assert "Xz $TMP_DIR/random /dev/null" ""
+assert_end "archive_helpers (Xz)"
 
-# report
-assert_end archive_helpers
+# TarXz
+# TODO ""
+assert_end "archive_helpers (TarXz)"
+
+# TarXzNpb
+# TODO ""
+assert_end "archive_helpers (TarXzNpb)"
+
+# TarXzExclude
+# TODO ""
+assert_end "archive_helpers (TarXzExclude)"
