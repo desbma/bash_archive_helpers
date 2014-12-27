@@ -1,0 +1,41 @@
+#!/bin/bash -eu
+
+set -o pipefail
+
+# auto cleanup
+at_exit() {
+  set +u
+  rm -Rf "$TMP_DIR"
+  set -u
+}
+trap at_exit EXIT
+
+readonly TMP_DIR=$(mktemp -d /tmp/$(basename -- $0).XXXXXXXXXX)
+
+cd "$(dirname -- $0)"
+
+if [ ! -f assert.sh ]
+then
+  wget https://raw.githubusercontent.com/lehmannro/assert.sh/v1.0.2/assert.sh
+fi
+
+. assert.sh
+. archive_helpers
+
+# Universal untar
+assert_raises "true" 0
+
+# No compression
+assert_raises "true" 0
+
+# Gzip
+assert_raises "true" 0
+
+# Bzip2
+assert_raises "true" 0
+
+# Xz
+assert_raises "true" 0
+
+# report
+assert_end archive_helpers
