@@ -22,6 +22,14 @@ fi
 . assert.sh
 . archive_helpers
 
+# report versions
+echo "Bash: $BASH_VERSION"
+echo "tar: $(tar --version 2>&1 | head -n 1)"
+echo "pv: $(pv -V 2>&1 | head -n 1 | cut -d ' ' -f 2)"
+echo "gzip: $(gzip -V 2>&1 | head -n 1 | cut -d ' ' -f 2-)"
+echo "bzip2: $(bzip2 -V 2>&1 | head -n 1 | sed 's/^.*Version \(.*\)$/\1/')"
+echo "xz: $(xz -V 2>&1 | cut -d ' ' -f 4)"
+
 # create dummy data
 dd status=noxfer if=/dev/urandom of=$TMP_DIR/random bs=4K count=8 2> /dev/null
 
