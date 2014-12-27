@@ -1,7 +1,7 @@
 if [ ! "$(which pigz)" -o ! "$(which pbzip2)" -o ! "$(which pv)" -o ! "$(which xz)" ]
 then
-  echo "Missing dependency for $0" >&2
-  [ ! "$PS1" ] && exit 1
+  echo "Missing dependency for $BASH_SOURCE" >&2
+  return 1
 fi
 
 
