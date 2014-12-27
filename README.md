@@ -12,6 +12,8 @@ The command `TarXz some_directory archive.tar.xz` produces the same output file 
 
 This is written in pure Bash and should be portable on most Unix systems as long as you meet the requirements below.
 
+Automated unit tests are implemented using [assert.sh](https://github.com/lehmannro/assert.sh).
+
 
 ## Requirements
 
