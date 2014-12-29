@@ -45,9 +45,77 @@ echo "xz: $(xz -V 2>&1 | cut -d ' ' -f 4)"
 # create dummy data
 dd status=noxfer if=/dev/urandom of=$TMP_INPUT_DIR/random1 bs=4K count=8 2> /dev/null
 dd status=noxfer if=/dev/urandom of=$TMP_INPUT_DIR/random2 bs=4K count=8 2> /dev/null
+pushd $TMP_INPUT_DIR > /dev/null
+tar -cf random1.tar random1
+tar -czf random1.tar.gz random1
+tar -cjf random1.tar.bz2 random1
+tar -cJf random1.tar.xz random1
+tar -cf random.tar random{1,2}
+tar -czf random.tar.gz random{1,2}
+tar -cjf random.tar.bz2 random{1,2}
+tar -cJf random.tar.xz random{1,2}
+popd > /dev/null
 
-# UnTar
-# TODO
+# UnTar (raw tar)
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar" 0
+UnTar $TMP_INPUT_DIR/random1.tar &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random.tar" 0
+UnTar $TMP_INPUT_DIR/random.tar &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+
+# UnTar (gzip)
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.gz" 0
+UnTar $TMP_INPUT_DIR/random1.tar.gz &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random.tar.gz" 0
+UnTar $TMP_INPUT_DIR/random.tar.gz &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+
+# UnTar (bzip2)
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.bz2" 0
+UnTar $TMP_INPUT_DIR/random1.tar.bz2 &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random.tar.bz2" 0
+UnTar $TMP_INPUT_DIR/random.tar.bz2 &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+
+# UnTar (xz)
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.xz" 0
+UnTar $TMP_INPUT_DIR/random1.tar.xz &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+pushd $TMP_OUTPUT_DIR > /dev/null
+#assert_raises "UnTar $TMP_INPUT_DIR/random.tar.xz" 0
+UnTar $TMP_INPUT_DIR/random.tar.xz &> /dev/null
+popd > /dev/null
+assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" ""
+assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" ""
+rm -Rf $TMP_OUTPUT_DIR/*
+
 assert_end "archive_helpers (UnTar)"
 
 # Tar
