@@ -1,6 +1,14 @@
-#!/bin/bash -eux
+#!/bin/bash -eu
 
 set -o pipefail
+
+set +u
+if [ "$CI" -a "$TRAVIS" ]
+then
+  # be very verbose to help investigate tests that only fail on Travis
+  set -x
+fi
+set +u
 
 # auto cleanup
 at_exit() {
