@@ -19,6 +19,10 @@ at_exit() {
 trap at_exit EXIT
 
 readonly TMP_DIR=$(mktemp -d /tmp/$(basename -- $0).XXXXXXXXXX)
+readonly TMP_INPUT_DIR=$TMP_DIR/input
+readonly TMP_OUTPUT_DIR=$TMP_DIR/output
+
+mkdir $TMP_INPUT_DIR $TMP_OUTPUT_DIR
 
 cd "$(dirname -- $0)"
 
@@ -39,7 +43,8 @@ echo "bzip2: $(bzip2 -V 2>&1 | head -n 1 | sed 's/^.*Version \(.*\)$/\1/')"
 echo "xz: $(xz -V 2>&1 | cut -d ' ' -f 4)"
 
 # create dummy data
-dd status=noxfer if=/dev/urandom of=$TMP_DIR/random bs=4K count=8 2> /dev/null
+dd status=noxfer if=/dev/urandom of=$TMP_INPUT_DIR/random1 bs=4K count=8 2> /dev/null
+dd status=noxfer if=/dev/urandom of=$TMP_INPUT_DIR/random2 bs=4K count=8 2> /dev/null
 
 # UnTar
 # TODO
@@ -58,16 +63,16 @@ assert_end "archive_helpers (TarNpb)"
 assert_end "archive_helpers (TarExclude)"
 
 # Gz
-assert_raises "Gz $TMP_DIR $TMP_DIR.gz" 1 ""
-assert_raises "test -f $TMP_DIR.gz" 1 ""
-assert_raises "Gz $TMP_DIR/random $TMP_DIR/random.gz" 0 ""
-assert_raises "gzip -cd $TMP_DIR/random.gz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
-rm $TMP_DIR/random{2,.gz}
-assert_raises "Gz $TMP_DIR/random > $TMP_DIR/random.gz" 0 ""
-assert_raises "gzip -cd $TMP_DIR/random.gz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
-rm $TMP_DIR/random{2,.gz}
-assert "Gz $TMP_DIR/random > /dev/null" ""
-assert "Gz $TMP_DIR/random /dev/null" ""
+assert_raises "Gz $TMP_INPUT_DIR $TMP_OUTPUT_DIR/out.gz" 1 ""
+assert_raises "test -f $TMP_OUTPUT_DIR/out.gz" 1 ""
+assert_raises "Gz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.gz" 0 ""
+assert_raises "gzip -cd $TMP_OUTPUT_DIR/random1.gz > $TMP_OUTPUT_DIR/random1; cmp $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" 0 ""
+rm -Rf $TMP_OUTPUT_DIR/*
+assert_raises "Gz $TMP_INPUT_DIR/random1 > $TMP_OUTPUT_DIR/random1.gz" 0 ""
+assert_raises "gzip -cd $TMP_OUTPUT_DIR/random1.gz > $TMP_OUTPUT_DIR/random1; cmp $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" 0 ""
+rm -Rf $TMP_OUTPUT_DIR/*
+assert "Gz $TMP_INPUT_DIR/random1 > /dev/null" ""
+assert "Gz $TMP_INPUT_DIR/random1 /dev/null" ""
 assert_end "archive_helpers (Gz)"
 
 # TarGz
@@ -83,16 +88,16 @@ assert_end "archive_helpers (TarGzNpb)"
 assert_end "archive_helpers (TarGzExclude)"
 
 # Bz2
-assert_raises "Bz2 $TMP_DIR $TMP_DIR.bz2" 1 ""
-assert_raises "test -f $TMP_DIR.bz2" 1 ""
-assert_raises "Bz2 $TMP_DIR/random $TMP_DIR/random.bz2" 0 ""
-assert_raises "bzip2 -cd $TMP_DIR/random.bz2 > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
-rm $TMP_DIR/random{2,.bz2}
-assert_raises "Bz2 $TMP_DIR/random > $TMP_DIR/random.bz2" 0 ""
-assert_raises "bzip2 -cd $TMP_DIR/random.bz2 > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
-rm $TMP_DIR/random{2,.bz2}
-assert "Bz2 $TMP_DIR/random > /dev/null" ""
-assert "Bz2 $TMP_DIR/random /dev/null" ""
+assert_raises "Bz2 $TMP_INPUT_DIR $TMP_OUTPUT_DIR/out.bz2" 1 ""
+assert_raises "test -f $TMP_OUTPUT_DIR/out.bz2" 1 ""
+assert_raises "Bz2 $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.bz2" 0 ""
+assert_raises "bzip2 -cd $TMP_OUTPUT_DIR/random1.bz2 > $TMP_OUTPUT_DIR/random1; cmp $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" 0 ""
+rm -Rf $TMP_OUTPUT_DIR/*
+assert_raises "Bz2 $TMP_INPUT_DIR/random1 > $TMP_OUTPUT_DIR/random1.bz2" 0 ""
+assert_raises "bzip2 -cd $TMP_OUTPUT_DIR/random1.bz2 > $TMP_OUTPUT_DIR/random1; cmp $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" 0 ""
+rm -Rf $TMP_OUTPUT_DIR/*
+assert "Bz2 $TMP_INPUT_DIR/random1 > /dev/null" ""
+assert "Bz2 $TMP_INPUT_DIR/random1 /dev/null" ""
 assert_end "archive_helpers (Bz2)"
 
 # TarBz2
@@ -108,16 +113,16 @@ assert_end "archive_helpers (TarBz2Npb)"
 assert_end "archive_helpers (TarBz2Exclude)"
 
 # Xz
-assert_raises "Xz $TMP_DIR $TMP_DIR.xz" 1 ""
-assert_raises "test -f $TMP_DIR.xz" 1 ""
-assert_raises "Xz $TMP_DIR/random $TMP_DIR/random.xz" 0 ""
-assert_raises "xz -cd $TMP_DIR/random.xz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
-rm $TMP_DIR/random{2,.xz}
-assert_raises "Xz $TMP_DIR/random > $TMP_DIR/random.xz" 0 ""
-assert_raises "xz -cd $TMP_DIR/random.xz > $TMP_DIR/random2; cmp $TMP_DIR/random{,2}" 0 ""
-rm $TMP_DIR/random{2,.xz}
-assert "Xz $TMP_DIR/random > /dev/null" ""
-assert "Xz $TMP_DIR/random /dev/null" ""
+assert_raises "Xz $TMP_INPUT_DIR $TMP_OUTPUT_DIR/out.xz" 1 ""
+assert_raises "test -f $TMP_OUTPUT_DIR/out.xz" 1 ""
+assert_raises "Xz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.xz" 0 ""
+assert_raises "xz -cd $TMP_OUTPUT_DIR/random1.xz > $TMP_OUTPUT_DIR/random1; cmp $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" 0 ""
+rm -Rf $TMP_OUTPUT_DIR/*
+assert_raises "Xz $TMP_INPUT_DIR/random1 > $TMP_OUTPUT_DIR/random1.xz" 0 ""
+assert_raises "xz -cd $TMP_OUTPUT_DIR/random1.xz > $TMP_OUTPUT_DIR/random1; cmp $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" 0 ""
+rm -Rf $TMP_OUTPUT_DIR/*
+assert "Xz $TMP_INPUT_DIR/random1 > /dev/null" ""
+assert "Xz $TMP_INPUT_DIR/random1 /dev/null" ""
 assert_end "archive_helpers (Xz)"
 
 # TarXz
