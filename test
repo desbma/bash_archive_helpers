@@ -135,7 +135,7 @@ assert_end "archive_helpers (TarNpb)"
 # TarExclude
 assert_raises "TarExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar random.tar* random1.tar*" 0 ""
 assert_raises "tar -tf $TMP_OUTPUT_DIR/random.tar" 0 ""
-assert "tar -tf $TMP_OUTPUT_DIR/random.tar" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random2\n$TMP_INPUT_DIR/random1" ""
+assert "tar -tf $TMP_OUTPUT_DIR/random.tar | sort" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random1\n$TMP_INPUT_DIR/random2" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarExclude)"
 
@@ -172,7 +172,7 @@ assert_end "archive_helpers (TarGzNpb)"
 #assert_raises "TarGzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.gz random.tar* random1.tar*" 0
 TarGzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.gz random.tar* random1.tar* &> /dev/null
 assert_raises "tar -tzf $TMP_OUTPUT_DIR/random.tar.gz" 0 ""
-assert "tar -tzf $TMP_OUTPUT_DIR/random.tar.gz" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random2\n$TMP_INPUT_DIR/random1" ""
+assert "tar -tzf $TMP_OUTPUT_DIR/random.tar.gz | sort" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random1\n$TMP_INPUT_DIR/random2" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarGzExclude)"
 
@@ -209,7 +209,7 @@ assert_end "archive_helpers (TarBz2Npb)"
 #assert_raises "TarBz2Exclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.bz2 random.tar* random1.tar*" 0
 TarBz2Exclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.bz2 random.tar* random1.tar* &> /dev/null
 assert_raises "tar -tjf $TMP_OUTPUT_DIR/random.tar.bz2" 0 ""
-assert "tar -tjf $TMP_OUTPUT_DIR/random.tar.bz2" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random2\n$TMP_INPUT_DIR/random1" ""
+assert "tar -tjf $TMP_OUTPUT_DIR/random.tar.bz2 | sort" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random1\n$TMP_INPUT_DIR/random2" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarBz2Exclude)"
 
@@ -246,6 +246,6 @@ assert_end "archive_helpers (TarXzNpb)"
 #assert_raises "TarXzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.xz random.tar* random1.tar*" 0 ""
 TarXzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.xz random.tar* random1.tar* &> /dev/null
 assert_raises "tar -tJf $TMP_OUTPUT_DIR/random.tar.xz" 0 ""
-assert "tar -tJf $TMP_OUTPUT_DIR/random.tar.xz" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random2\n$TMP_INPUT_DIR/random1" ""
+assert "tar -tJf $TMP_OUTPUT_DIR/random.tar.xz | sort" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random1\n$TMP_INPUT_DIR/random2" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarXzExclude)"
