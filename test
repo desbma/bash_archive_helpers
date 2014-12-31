@@ -28,7 +28,7 @@ cd "$(dirname -- $0)"
 
 if [ ! -f assert.sh ]
 then
-  wget https://raw.githubusercontent.com/lehmannro/assert.sh/v1.0.2/assert.sh
+  wget https://raw.githubusercontent.com/lehmannro/assert.sh/9424e1aa10ac8897e3cea56912a8f4bf5a1b7ce1/assert.sh
 fi
 
 . assert.sh
