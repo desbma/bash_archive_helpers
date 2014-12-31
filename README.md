@@ -1,7 +1,7 @@
 Bash archive helpers
 ====================
 
-[![Tests Status](https://img.shields.io/travis/desbma/bash_archive_helpers/master.svg?label=tests&style=flat)](https://travis-ci.org/bash_archive_helpers/GoogleSpeech)
+[![Tests Status](https://img.shields.io/travis/desbma/bash_archive_helpers/master.svg?label=tests&style=flat)](https://travis-ci.org/desbma/bash_archive_helpers/)
 
 This is a collections of 16 Bash functions to create/extract archives (gz, bzip2, xz, tar, tar.gz, tar.bzip2 or tar.xz) from Bash, while providing the following useful features:
 * Display a nice progress bar, with current and average rate, and estimated time to complete
