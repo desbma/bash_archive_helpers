@@ -8,7 +8,7 @@ then
   # be very verbose to help investigate tests that only fail on Travis
   set -x
 fi
-set +u
+set -u
 
 # auto cleanup
 at_exit() {
