@@ -7,7 +7,10 @@ fi
 
 # workaround a bug with pv -c which breaks Bash keyboard echo
 fix_shell_echo() {
-  stty echo
+  if [ -t 2 ]  # if stderr is connected to a terminal
+  then
+    stty echo
+  fi
 }
 
 

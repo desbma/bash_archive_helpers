@@ -58,14 +58,12 @@ popd > /dev/null
 
 # UnTar (raw tar)
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar" 0 ""
-UnTar $TMP_INPUT_DIR/random1.tar &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random1.tar" 0 ""
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random.tar" 0 ""
-UnTar $TMP_INPUT_DIR/random.tar &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random.tar" 0 ""
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" "" ""
@@ -73,14 +71,12 @@ rm -Rf $TMP_OUTPUT_DIR/*
 
 # UnTar (gzip)
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.gz" 0 ""
-UnTar $TMP_INPUT_DIR/random1.tar.gz &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.gz" 0 ""
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random.tar.gz" 0 ""
-UnTar $TMP_INPUT_DIR/random.tar.gz &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random.tar.gz" 0 ""
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" "" ""
@@ -88,14 +84,12 @@ rm -Rf $TMP_OUTPUT_DIR/*
 
 # UnTar (bzip2)
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.bz2" 0 ""
-UnTar $TMP_INPUT_DIR/random1.tar.bz2 &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.bz2" 0 ""
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random.tar.bz2" 0
-UnTar $TMP_INPUT_DIR/random.tar.bz2 &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random.tar.bz2" 0
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" "" ""
@@ -103,14 +97,12 @@ rm -Rf $TMP_OUTPUT_DIR/*
 
 # UnTar (xz)
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.xz" 0 ""
-UnTar $TMP_INPUT_DIR/random1.tar.xz &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random1.tar.xz" 0 ""
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 pushd $TMP_OUTPUT_DIR > /dev/null
-#assert_raises "UnTar $TMP_INPUT_DIR/random.tar.xz" 0 ""
-UnTar $TMP_INPUT_DIR/random.tar.xz &> /dev/null
+assert_raises "UnTar $TMP_INPUT_DIR/random.tar.xz" 0 ""
 popd > /dev/null
 assert "diff $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1" "" ""
 assert "diff $TMP_INPUT_DIR/random2 $TMP_OUTPUT_DIR/random2" "" ""
@@ -153,24 +145,21 @@ assert "Gz $TMP_INPUT_DIR/random1 /dev/null" "" ""
 assert_end "archive_helpers (Gz)"
 
 # TarGz
-#assert_raises "TarGz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.gz" 0
-TarGz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.gz &> /dev/null
+assert_raises "TarGz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.gz" 0
 assert_raises "tar -tzf $TMP_OUTPUT_DIR/random1.tar.gz" 0 ""
 assert "tar -tzf $TMP_OUTPUT_DIR/random1.tar.gz" "$TMP_INPUT_DIR/random1" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarGz)"
 
 # TarGzNpb
-#assert_raises "TarGzNpb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.gz" 0
-TarGzNpb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.gz &> /dev/null
+assert_raises "TarGzNpb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.gz" 0
 assert_raises "tar -tzf $TMP_OUTPUT_DIR/random1.tar.gz" 0 ""
 assert "tar -tzf $TMP_OUTPUT_DIR/random1.tar.gz" "$TMP_INPUT_DIR/random1" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarGzNpb)"
 
 # TarGzExclude
-#assert_raises "TarGzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.gz random.tar* random1.tar*" 0
-TarGzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.gz random.tar* random1.tar* &> /dev/null
+assert_raises "TarGzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.gz random.tar* random1.tar*" 0
 assert_raises "tar -tzf $TMP_OUTPUT_DIR/random.tar.gz" 0 ""
 assert "tar -tzf $TMP_OUTPUT_DIR/random.tar.gz | sort" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random1\n$TMP_INPUT_DIR/random2" ""
 rm -Rf $TMP_OUTPUT_DIR/*
@@ -190,24 +179,21 @@ assert "Bz2 $TMP_INPUT_DIR/random1 /dev/null" "" ""
 assert_end "archive_helpers (Bz2)"
 
 # TarBz2
-#assert_raises "TarBz2 $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.bz2" 0 ""
-TarBz2 $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.bz2 &> /dev/null
+assert_raises "TarBz2 $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.bz2" 0 ""
 assert_raises "tar -tjf $TMP_OUTPUT_DIR/random1.tar.bz2" 0 ""
 assert "tar -tjf $TMP_OUTPUT_DIR/random1.tar.bz2" "$TMP_INPUT_DIR/random1" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarBz2)"
 
 # TarBz2Npb
-#assert_raises "TarBz2Npb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.bz2" 0
-TarBz2Npb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.bz2 &> /dev/null
+assert_raises "TarBz2Npb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.bz2" 0
 assert_raises "tar -tjf $TMP_OUTPUT_DIR/random1.tar.bz2" 0 ""
 assert "tar -tjf $TMP_OUTPUT_DIR/random1.tar.bz2" "$TMP_INPUT_DIR/random1" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarBz2Npb)"
 
 # TarBz2Exclude
-#assert_raises "TarBz2Exclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.bz2 random.tar* random1.tar*" 0
-TarBz2Exclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.bz2 random.tar* random1.tar* &> /dev/null
+assert_raises "TarBz2Exclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.bz2 random.tar* random1.tar*" 0
 assert_raises "tar -tjf $TMP_OUTPUT_DIR/random.tar.bz2" 0 ""
 assert "tar -tjf $TMP_OUTPUT_DIR/random.tar.bz2 | sort" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random1\n$TMP_INPUT_DIR/random2" ""
 rm -Rf $TMP_OUTPUT_DIR/*
@@ -227,24 +213,21 @@ assert "Xz $TMP_INPUT_DIR/random1 /dev/null" "" ""
 assert_end "archive_helpers (Xz)"
 
 # TarXz
-#assert_raises "TarXz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.xz" 0 ""
-TarXz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.xz &> /dev/null
+assert_raises "TarXz $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.xz" 0 ""
 assert_raises "tar -tJf $TMP_OUTPUT_DIR/random1.tar.xz" 0 ""
 assert "tar -tJf $TMP_OUTPUT_DIR/random1.tar.xz" "$TMP_INPUT_DIR/random1" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarXz)"
 
 # TarXzNpb
-#assert_raises "TarXzNpb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.xz" 0
-TarXzNpb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.xz &> /dev/null
+assert_raises "TarXzNpb $TMP_INPUT_DIR/random1 $TMP_OUTPUT_DIR/random1.tar.xz" 0
 assert_raises "tar -tJf $TMP_OUTPUT_DIR/random1.tar.xz" 0 ""
 assert "tar -tJf $TMP_OUTPUT_DIR/random1.tar.xz" "$TMP_INPUT_DIR/random1" ""
 rm -Rf $TMP_OUTPUT_DIR/*
 assert_end "archive_helpers (TarXzNpb)"
 
 # TarXzExclude
-#assert_raises "TarXzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.xz random.tar* random1.tar*" 0 ""
-TarXzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.xz random.tar* random1.tar* &> /dev/null
+assert_raises "TarXzExclude $TMP_INPUT_DIR $TMP_OUTPUT_DIR/random.tar.xz random.tar* random1.tar*" 0 ""
 assert_raises "tar -tJf $TMP_OUTPUT_DIR/random.tar.xz" 0 ""
 assert "tar -tJf $TMP_OUTPUT_DIR/random.tar.xz | sort" "$TMP_INPUT_DIR/\n$TMP_INPUT_DIR/random1\n$TMP_INPUT_DIR/random2" ""
 rm -Rf $TMP_OUTPUT_DIR/*
