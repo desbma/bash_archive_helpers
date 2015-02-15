@@ -50,7 +50,7 @@ TarGzNpb | Same as previous, but does not display a progress bar. This is useful
 TarGzExclude | Create a tar archive, with gzip compression, excluding some files or directories from the input. | Yes | `TarGzExclude INPUT [OUTPUT_TAR_GZ_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_GZ_FILE` is omitted, output is redirected to stdout.
 Bz2 | Compress a file with bzip2 compression. | Yes | `Bz2 INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
 TarBz2 | Create a tar archive with bzip2 compression. | Yes | `TarBz2 INPUT [OUTPUT_TAR_BZ2_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_BZ2_FILE` is omitted, output is redirected to stdout.
-TarBz2Npb | Same as previous, but does not display a progress bar.  This is useful with huge directory trees, because input size calculation will be skipped.
+TarBz2Npb | Same as previous, but does not display a progress bar.  This is useful with huge directory trees, because input size calculation will be skipped. | Yes
 TarBz2Exclude | Create a tar archive, with bzip2 compression, excluding some files or directories from the input. | Yes | `TarBz2Exclude INPUT [OUTPUT_TAR_BZ2_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_BZ2_FILE` is omitted, output is redirected to stdout.
 Xz | Compress a file with xz compression. | No | `Xz INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
 TarXz | Create a tar archive with xz compression. | No | `TarXz INPUT [OUTPUT_TAR_XZ_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_XZ_FILE` is omitted, output is redirected to stdout.
