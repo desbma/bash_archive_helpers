@@ -38,24 +38,24 @@ On Ubuntu and other Debian derivatives, you can install the other dependencies w
 
 ## List of functions & usage
 
-Name | Description | Usage
----- | ----------- | -----
-UnTar | Extract an tar archive, uncompressed or compressed with gz, bzip2 or xz (detected from extension). | `Untar INPUT_TAR_FILE`.
-Tar | Create a tar archive. | `Tar INPUT [OUTPUT_TAR_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_FILE` is omitted, output is redirected to stdout.
-TarNpb | Same as previous, but does not display a progress bar. This is useful with huge directory trees, because input size calculation will be skipped.
-TarExclude | Create a tar archive, excluding some files or directories from the input. | `TarExclude INPUT [OUTPUT_TAR_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_FILE` is omitted, output is redirected to stdout.
-Gz |  Compress a file with gzip compression. | `Gz INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
-TarGz | Create a tar archive with gzip compression. | `TarGz INPUT [OUTPUT_TAR_GZ_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_GZ_FILE` is omitted, output is redirected to stdout.
-TarGzNpb | Same as previous, but does not display a progress bar. This is useful with huge directory trees, because input size calculation will be skipped.
-TarGzExclude | Create a tar archive, with gzip compression, excluding some files or directories from the input. | `TarGzExclude INPUT [OUTPUT_TAR_GZ_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_GZ_FILE` is omitted, output is redirected to stdout.
-Bz2 | Compress a file with bzip2 compression. | `Bz2 INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
-TarBz2 | Create a tar archive with bzip2 compression. | `TarBz2 INPUT [OUTPUT_TAR_BZ2_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_BZ2_FILE` is omitted, output is redirected to stdout.
+Name | Description | Parallel processing | Usage
+---- | ----------- | ------------------- | -----
+UnTar | Extract an tar archive, uncompressed or compressed with gz, bzip2 or xz (detected from extension). | Yes (for gz and bzip2 archives) | `Untar INPUT_TAR_FILE`.
+Tar | Create a tar archive. | No | `Tar INPUT [OUTPUT_TAR_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_FILE` is omitted, output is redirected to stdout.
+TarNpb | Same as previous, but does not display a progress bar. This is useful with huge directory trees, because input size calculation will be skipped. | No
+TarExclude | Create a tar archive, excluding some files or directories from the input. | No | `TarExclude INPUT [OUTPUT_TAR_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_FILE` is omitted, output is redirected to stdout.
+Gz |  Compress a file with gzip compression. | Yes | `Gz INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
+TarGz | Create a tar archive with gzip compression. | Yes | `TarGz INPUT [OUTPUT_TAR_GZ_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_GZ_FILE` is omitted, output is redirected to stdout.
+TarGzNpb | Same as previous, but does not display a progress bar. This is useful with huge directory trees, because input size calculation will be skipped. | Yes
+TarGzExclude | Create a tar archive, with gzip compression, excluding some files or directories from the input. | Yes | `TarGzExclude INPUT [OUTPUT_TAR_GZ_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_GZ_FILE` is omitted, output is redirected to stdout.
+Bz2 | Compress a file with bzip2 compression. | Yes | `Bz2 INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
+TarBz2 | Create a tar archive with bzip2 compression. | Yes | `TarBz2 INPUT [OUTPUT_TAR_BZ2_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_BZ2_FILE` is omitted, output is redirected to stdout.
 TarBz2Npb | Same as previous, but does not display a progress bar.  This is useful with huge directory trees, because input size calculation will be skipped.
-TarBz2Exclude | Create a tar archive, with bzip2 compression, excluding some files or directories from the input. | `TarBz2Exclude INPUT [OUTPUT_TAR_BZ2_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_BZ2_FILE` is omitted, output is redirected to stdout.
-Xz | Compress a file with xz compression. | `Xz INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
-TarXz | Create a tar archive with xz compression. | `TarXz INPUT [OUTPUT_TAR_XZ_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_XZ_FILE` is omitted, output is redirected to stdout.
-TarXzNpb | Same as previous, but does not display a progress bar. This is useful with huge directory trees, because input size calculation will be skipped.
-TarXzExclude | Create a tar archive, with xz compression, excluding some files or directories from the input. | `TarXzExclude INPUT [OUTPUT_TAR_XZ_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_XZ_FILE` is omitted, output is redirected to stdout.
+TarBz2Exclude | Create a tar archive, with bzip2 compression, excluding some files or directories from the input. | Yes | `TarBz2Exclude INPUT [OUTPUT_TAR_BZ2_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_BZ2_FILE` is omitted, output is redirected to stdout.
+Xz | Compress a file with xz compression. | No | `Xz INPUT [OUTPUT]`. If `OUTPUT` is omitted, output is redirected to stdout.
+TarXz | Create a tar archive with xz compression. | No | `TarXz INPUT [OUTPUT_TAR_XZ_FILE [OPTIONS_PASSED_TO_TAR...]]`. If `OUTPUT_TAR_XZ_FILE` is omitted, output is redirected to stdout.
+TarXzNpb | Same as previous, but does not display a progress bar. This is useful with huge directory trees, because input size calculation will be skipped. | No
+TarXzExclude | Create a tar archive, with xz compression, excluding some files or directories from the input. | No | `TarXzExclude INPUT [OUTPUT_TAR_XZ_FILE [PATHS_TO_EXCLUDE...]]`. If `OUTPUT_TAR_XZ_FILE` is omitted, output is redirected to stdout.
 
 
 ## Known issues & limitations
