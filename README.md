@@ -32,9 +32,9 @@ On Ubuntu and other Debian derivatives, you can install the other dependencies w
 
 ## Installation
 
-* Download it to your home directory, ie with:
+* Download it to your home directory, ie with:  
 `curl https://raw.githubusercontent.com/desbma/bash_archive_helpers/master/archive_helpers > ~/bash_archive_helpers`
-* Add this line to your _~/.bashrc_ file:
+* Add this line to your _~/.bashrc_ file:  
 `. ~/bash_archive_helpers`
 
 
