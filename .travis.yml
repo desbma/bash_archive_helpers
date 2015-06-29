@@ -1,6 +1,14 @@
 language: python
+before_install:
+  - "sudo apt-get -q update"
 install:
   - "sudo apt-get install -yV pv pigz pbzip2 xz-utils"
   - "sudo apt-get install -yV bc"  # needed by assert.sh
 script:
   - "./test"
+notifications:
+  email:
+    recipients:
+      - secure: "Av3mPIGomKk7GN6s1fe4vtwo8dRRlbBYuKmKOCN9yMe7d2hokyxUMUxS5FA+nJb5GN/J5qOtJ5vprhncbrDGtZzqXYSj7wdfCkt4ktYWjn6Uz0ti4r1wXZe8p8nuroGNm7SrDbGNqvoYZEZtWtr5Tdxqi+V/cvwNbNsKAHkgXqo="
+    on_success: always
+    on_failure: always
