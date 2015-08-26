@@ -46,11 +46,11 @@ echo "xz: $(xz -V 2>&1 | cut -d ' ' -f 4)"
 dd status=noxfer if=/dev/urandom of=$TMP_INPUT_DIR/random1 bs=4K count=8 2> /dev/null
 dd status=noxfer if=/dev/urandom of=$TMP_INPUT_DIR/random2 bs=4K count=8 2> /dev/null
 pushd $TMP_INPUT_DIR > /dev/null
-gzip -k random1
+gzip -c random1 > random1.gz
 cp random1.{gz,gzip}
-bzip2 -k random1
+bzip2 -c random1 > random1.bz2
 cp random1.{bz2,bzip2}
-xz -k random1
+xz -c random1 > random1.xz
 cp random1.{xz,xzz}
 tar -cf random1.tar random1
 tar -czf random1.tar.gz random1
