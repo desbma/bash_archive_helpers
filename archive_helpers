@@ -102,6 +102,28 @@ Gz() {
   fi
 }
 
+UnGz() {
+  local -r in=${1:?}
+  local -r out=${2:-${in%.gz}}
+  if [ ! -f "$in" ]
+  then
+    echo "Input is not a file" >&2
+    return 1
+  elif [ "$out" = "$in" ]
+  then
+    echo "Please specify output file" >&2
+    return 1
+  elif [ -f "$out" ]
+  then
+    echo "Output file already exists" >&2
+    return 1
+  else
+    local -r pretty_size=$(du -sbh "$in" 2> /dev/null | cut -f 1)
+    echo "File size: $pretty_size" >&2
+    pv -pterab -N 'pigz' -i 0.2 "$in" | pigz -d > "$out"
+  fi
+}
+
 TarGz() {
   local -r in=${1:?}
   local -r out=${2:-/dev/stdout}
@@ -156,6 +178,28 @@ Bz2() {
   fi
 }
 
+UnBz2() {
+  local -r in=${1:?}
+  local -r out=${2:-${in%.bz2}}
+  if [ ! -f "$in" ]
+  then
+    echo "Input is not a file" >&2
+    return 1
+  elif [ "$out" = "$in" ]
+  then
+    echo "Please specify output file" >&2
+    return 1
+  elif [ -f "$out" ]
+  then
+    echo "Output file already exists" >&2
+    return 1
+  else
+    local -r pretty_size=$(du -sbh "$in" 2> /dev/null | cut -f 1)
+    echo "File size: $pretty_size" >&2
+    pv -pterab -N 'pbzip2' -i 0.2 "$in" | pbzip2 -d > "$out"
+  fi
+}
+
 TarBz2() {
   local -r in=${1:?}
   local -r out=${2:-/dev/stdout}
@@ -207,6 +251,28 @@ Xz() {
     local -r pretty_size=$(du -sbh "$in" 2> /dev/null | cut -f 1)
     echo "File size: $pretty_size" >&2
     pv -pterab -N 'xz' -i 0.2 "$in" | xz > "$out"
+  fi
+}
+
+UnXz() {
+  local -r in=${1:?}
+  local -r out=${2:-${in%.xz}}
+  if [ ! -f "$in" ]
+  then
+    echo "Input is not a file" >&2
+    return 1
+  elif [ "$out" = "$in" ]
+  then
+    echo "Please specify output file" >&2
+    return 1
+  elif [ -f "$out" ]
+  then
+    echo "Output file already exists" >&2
+    return 1
+  else
+    local -r pretty_size=$(du -sbh "$in" 2> /dev/null | cut -f 1)
+    echo "File size: $pretty_size" >&2
+    pv -pterab -N 'xz' -i 0.2 "$in" | xz -d > "$out"
   fi
 }
 
