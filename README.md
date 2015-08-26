@@ -62,7 +62,7 @@ TarXzExclude | Create a tar archive, with xz compression, excluding some files o
 
 ## Known issues & limitations
 
-* Size calculations is sometimes inexact, as a result the progress bar may reach for example 102%
+* Size calculations are sometimes inexact when creating tar archives for large directory trees, as a result the progress bar may reach for example 102%
 * Tar errors are not displayed
 
 
