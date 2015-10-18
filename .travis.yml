@@ -1,9 +1,9 @@
-language: python
+language: generic
 before_install:
   - "sudo apt-get -q update"
 install:
-  - "sudo apt-get install -yV pv pigz pbzip2 xz-utils"
-  - "sudo apt-get install -yV bc"  # needed by assert.sh
+  - "sudo apt-get install -V pv pigz pbzip2 xz-utils"
+  - "sudo apt-get install -V bc"  # needed by assert.sh
 script:
   - "./test"
 notifications:
